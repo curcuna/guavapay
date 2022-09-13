@@ -1,12 +1,12 @@
 # Guavapay-Parcel Management
 
 
-This project, based on microservice oriented architecture, conceptually operatares as a parcel delivery application.
+This project, based on microservice oriented architecture, conceptually operatares as a parcel management application.
 
 Instructions to try it out
 1)	Download the project.
 2)	Download Docker Desktop
-3)	At the level of where compose.yml file, type “docker compose up” in terminal or command window.
+3)	At the level of compose.yml file, type “docker compose up” in terminal or command window.
 4)	Open the page <b><i>localhost:4200</i></b> in browser.
 
 Architecture
