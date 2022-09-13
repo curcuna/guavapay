@@ -5,6 +5,8 @@ services:
   rabbitmq:
     container_name: "rabbitmq"
     image: rabbitmq:3-management
+    networks:
+      - spring-cloud-network
     environment:
       - RABBITMQ_DEFAULT_USER=username
       - RABBITMQ_DEFAULT_PASS=password
@@ -15,6 +17,8 @@ services:
   postgres:
     container_name: postgres
     image: postgres
+    networks:
+      - spring-cloud-network
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespw
@@ -28,6 +32,11 @@ services:
   cargoservice:
     restart: always
     image: emrahozturk/guavapay:cargoservice
+    build:
+      context: ./cargoService
+      dockerfile: Dockerfile
+    networks:
+      - spring-cloud-network
     ports:
       - '8013:8013'
     environment:
@@ -37,6 +46,11 @@ services:
   orderservice:
     restart: always
     image: emrahozturk/guavapay:orderservice
+    build:
+      context: ./orderService
+      dockerfile: Dockerfile
+    networks:
+      - spring-cloud-network
     ports:
       - '8012:8012'
     environment:
@@ -46,6 +60,11 @@ services:
   authenticationservice:
     restart: always
     image: emrahozturk/guavapay:authenticationservice
+    build:
+      context: ./authService
+      dockerfile: Dockerfile
+    networks:
+      - spring-cloud-network
     ports:
       - '8011:8011'
     environment:
@@ -55,24 +74,30 @@ services:
   gateway:
     restart: always
     image: emrahozturk/guavapay:gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
     networks:
-      - gateway
+      - spring-cloud-network
     ports:
       - '8010:8010'
     environment:
-      AUTHENTICATION_SERVICE: localhost
-      ORDER_SERVICE: localhost
-      CARGO_SERVICE: localhost
+      AUTHENTICATION_SERVICE: authenticationservice
+      ORDER_SERVICE: orderservice
+      CARGO_SERVICE: cargoservice
 
   client:
     container_name: client
-    build: ./client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     networks:
-      - gateway
+      - spring-cloud-network
     ports:
       - "4200:80"
     environment:
-      GATEWAY: http://localhost:8010
+      GATEWAY: localhost
 
 networks:
-  gateway: {}
+  spring-cloud-network:
+    driver: bridge
