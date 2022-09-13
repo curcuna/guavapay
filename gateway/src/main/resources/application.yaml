@@ -7,6 +7,6 @@ jwt:
     validity: 1000
 
 service:
-  authentication: http://:8011/authentication
-  order: http://localhost:8012/order
-  cargo: http://localhost:8013/cargo
+  authentication: http://${AUTHENTICATION_SERVICE}:8011/authentication
+  order: http://${ORDER_SERVICE}:8012/order
+  cargo: http://${CARGO_SERVICE}:8013/cargo

@@ -25,7 +25,7 @@ export class AuthenticationService {
       responseType: 'text' as 'json'  // We accept plain text as response.
     };
     return this.http
-      .post<any>(`/authentication/signup`, user,  httpOptions);
+      .post<any>(`${environment.apiUrl}/authentication/signup`, user,  httpOptions);
   }
 
   createCourier(courier: Person): Observable<any> {
