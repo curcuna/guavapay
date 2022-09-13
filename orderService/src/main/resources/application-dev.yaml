@@ -1,0 +1,30 @@
+server:
+  port: 8012
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/order_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgrespw
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:data/changelog_1.0.sql
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: username
+    password: password
+
+springdoc:
+  swagger-ui:
+    path: /

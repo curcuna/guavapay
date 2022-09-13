@@ -1,0 +1,12 @@
+server:
+  port: 8010
+
+jwt:
+  secret: secretkey
+  token:
+    validity: 1000
+
+service:
+  authentication: http://localhost:8011/authentication
+  order: http://localhost:8012/order
+  cargo: http://localhost:8013/cargo

@@ -1,0 +1,30 @@
+server:
+  port: 8011
+
+spring:
+  application:
+    name: authentication-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authentication_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgrespw
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:data/changelog_1.0.sql
+
+jwt:
+  secret: secretkey
+  token:
+    validity: 86400000
+
+springdoc:
+  swagger-ui:
+    path: /
