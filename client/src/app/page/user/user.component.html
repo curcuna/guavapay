@@ -1,0 +1,49 @@
+<div class="auth-wrapper">
+  <form class="form-signin" [formGroup]="createOrderForm" (ngSubmit)="createOrder()">
+    <h3 class="h3 mb-3 font-weight-normal text-center">Create Parcel Delivery Order</h3>
+    <div class="form-group">
+      <label>Destination Address</label>
+      <input
+        type="destination"
+        class="form-control"
+        formControlName="destination"
+        placeholder="Destination Address"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-block btn-primary">Create Order</button>
+    <button type="button" class="btn btn-block btn-outline-secondary"
+            [disabled]="!selectedOrder" (click)="changeDestionation();">Change Destination</button>
+  </form>
+</div>
+
+<br><br><br>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="destination">
+    <th mat-header-cell *matHeaderCellDef> Destination Address. </th>
+    <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderStatus">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element"> <button [disabled]="element.orderStatus == 'CANCELED'" mat-button (click)="cancelOrder(element.id)" >Cancel</button> </td>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="selectedOrder = row"
+      [class.demo-row-is-clicked]="selectedOrder == row"></tr>
+</table>

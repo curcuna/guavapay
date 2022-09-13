@@ -1,0 +1,14 @@
+table {
+  width: 300px;
+}
+
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+  background-color: cadetblue;
+}
+

@@ -1,0 +1,34 @@
+<div class="auth-wrapper">
+
+  <a routerLink="signup">Sing-up</a>
+
+  <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+    <h3 class="h3 mb-3 font-weight-normal text-center">Login</h3>
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="username"
+        class="form-control"
+        formControlName="username"
+        placeholder="Enter username"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+      />
+    </div>
+    <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+    <br>
+    <br>
+    <br>
+    <button type='button' class="btn btn-block btn-secondary" (click)="setUserCredentials()">User</button>
+    <button type='button' class="btn btn-block btn-secondary" (click)="setAdminCredentials()">Admin</button>
+    <button type='button' class="btn btn-block btn-secondary" (click)="setCourierCredentials()">Courier</button>
+  </form>
+</div>

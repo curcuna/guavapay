@@ -1,0 +1,121 @@
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Parcel Delivery Orders">
+
+    <div class="auth-wrapper">
+      <form class="form-signin" [formGroup]="updateOrderForm" (ngSubmit)="updateOrder()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Create Parcel Delivery Order</h3>
+        <div class="form-group">
+          <label>Order Status</label>
+          <select
+            type="orderStatus"
+            class="form-control"
+            formControlName="orderStatus"
+            placeholder="Order Status">
+            <option [value]="orderStatus" *ngFor="let orderStatus of orderStatuses">{{ orderStatus }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="!selectedOrder">Update Order</button>
+      </form>
+
+      <form class="form-signin" [formGroup]="assignCargoForm" (ngSubmit)="assignCargo()">
+        <div class="form-group">
+          <label>Courier</label>
+          <select
+            type="courier"
+            class="form-control"
+            formControlName="courier"
+            placeholder="Courier">
+            <option [value]="courier.id" *ngFor="let courier of courierDataSource">{{ courier.username }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="!selectedOrder">Assign to Courier</button>
+      </form>
+    </div>
+
+    <br><br><br>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="destination">
+        <th mat-header-cell *matHeaderCellDef> Destination Address. </th>
+        <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="orderStatus">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selectedOrder = row"
+          [class.demo-row-is-clicked]="selectedOrder == row"></tr>
+    </table>
+  </mat-tab>
+
+  <mat-tab label="Couriers">
+
+
+    <div class="auth-wrapper">
+      <form class="form-signin" [formGroup]="createCourierForm" (ngSubmit)="createCourier()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Create Courier Form</h3>
+        <div class="form-group">
+          <label>Username</label>
+          <input
+            type="username"
+            class="form-control"
+            formControlName="username"
+            placeholder="Enter username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Create Courier</button>
+      </form>
+    </div>
+
+
+
+
+
+    <br><br><br>
+    <table mat-table [dataSource]="courierDataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="courierStatus">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.courierStatus}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="courierDisplayedColumns" ></tr>
+      <tr mat-row *matRowDef="let row; columns: courierDisplayedColumns;"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
